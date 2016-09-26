@@ -1,12 +1,21 @@
 <html>
 <head>
+	<title>MR Liver Iron Quantification</title>
 	<style>
+		body {
+			background-color: #2b3e50;
+			color: #eee;
+		}
 		input {
 			width: 50px;
+			color: #ddd;
+			background-color: #222;
 		}
 		textarea {
 			width: 100%;
 			height: 50em;
+			color: #999;
+			background-color: #222;
 		}
 	</style>
 
@@ -48,7 +57,7 @@
 </head>
 
 <body onload="ClipboardJSInit()">
-	<label for="R2">R2*: </label><input type="number" id="R2" oninput="update()" autofocus></input>
+	<label for="R2">R2*: </label><input type="number" id="R2" oninput="update()" autofocus></input> Hertz
 	<br><br>
 	<textarea id="report"></textarea>
 	<button id="btnCopy" data-clipboard-target="#report" oninput="ClipboardJSInit()">Copy to Clipboard</button>
