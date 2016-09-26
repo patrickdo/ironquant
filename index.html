@@ -9,20 +9,26 @@
 			height: 300px;
 		}
 	</style>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
 	<script>
+		function ClipboardJSInit() {
+			var clipboard = new Clipboard('#btnCopy');
+		};
+
 		function update() {
 			var R2 = document.getElementById("R2").value;
-			var ironConc = (25.4 * R2) + 202;
+			var ironConc = Math.round((25.4 * R2) + 202,1);
 			document.getElementById("report").value = 'COMPARISON: [None].\n\nTECHNIQUE:\nMR images of the abdomen focused on the liver were obtained.\nAxial GRE multi-echo sequences with short TR and a series of 8 varying TE values, ranging from approximately 1 msec to 8 msec.\nAxial in- and out-of-phase images. Axial T2 weighted respiratory triggered PROPELLER sequence with fat sat. Coronal T2 weighted respiratory triggered PROPELLER sequence. Axial DWI sequence with three b values. Calculated ADC map.\nFrom the GRE multi-echo sequence, color maps of the relaxation times and relaxivities were generated via the STARMAP software.\nA region of interest within the liver was placed on the calculated relaxivity map and the value of R2* was obtained.\nA calculation of iron concentration was performed using the following formula (ref: Wood JC et al. BLOOD 106, 4: 1460-1465):\n\n[Iron concentration] (in mcg/g of dry wt of liver) = 25.4 x R2* (in Hertz) + 202\n\nThe Mayo Clinic criteria for iron overload was used:\nReference values:\n200-2,400 mcg/g dry wt (male)\n400-1,600 mcg/g dry wt (female)\n\nConcentrations greater than the reference range are associated with hemosiderosis, thalassemia, or sideroblastic anemia.\n>3000 seen when there is iron overload without cellular injury and cirrhosis.\n> 10,000 is diagnostic of hemochromatosis.\n\n\nFINDINGS:\nLiver:  [No hepatic lesion seen.]\nLiver Iron Quantifications:  R2* measures ' + R2 + ' Hertz. The iron load is estimated to be ' + ironConc + ' microgram/g of dry weight of the liver.  This represents [an absence of] [a moderate/high] overload of iron.\nPancreas: [Unremarkable].\nSpleen: [Unremarkable].\nRemaining abdomen: [No abnormality seen].\n\nCONCLUSION:\nThe hepatic iron level is estimated to be ' + ironConc + ' microgram/g. This is [consistent with hemochromatosis.][with normal limits.][moderately elevated; cannot exclude hemochromatosis.]';
-
-			console.log('hi');
 			return;
-		}
+		};
 	</script>
 </head>
-<body>
+
+<body onload="ClipboardJSInit()">
 	<label for="R2">R2: </label><input type="number" id="R2" oninput="update()" autofocus></input>
 	<br>
 	<textarea id="report"></textarea>
+	<button id="btnCopy" data-clipboard-target="#report" oninput="ClipboardJSInit()">Copy to Clipboard</button>
 </body>
 </html>
